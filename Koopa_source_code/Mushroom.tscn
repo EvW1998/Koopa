@@ -1,0 +1,84 @@
+[gd_scene load_steps=4 format=1]
+
+[ext_resource path="res://scripts/Mushroom.gd" type="Script" id=1]
+[ext_resource path="res://mushroom_sprites.tscn" type="PackedScene" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+custom_solver_bias = 0.0
+extents = Vector2( 29.4923, 30.2202 )
+
+[node name="Mushroom" type="RigidBody2D"]
+
+input/pickable = false
+shapes/0/shape = SubResource( 1 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+collision/layers = 1
+collision/mask = 1
+mode = 0
+mass = 1.0
+friction = 1.0
+bounce = 0.0
+gravity_scale = 9.8
+custom_integrator = false
+continuous_cd = 0
+contacts_reported = 0
+contact_monitor = false
+sleeping = false
+can_sleep = true
+velocity/linear = Vector2( 0, 0 )
+velocity/angular = 0.0
+damp_override/linear = -1.0
+damp_override/angular = -1.0
+script/script = ExtResource( 1 )
+player_speed = -100
+player_jump_height = 50
+
+[node name="character_sprites" parent="." instance=ExtResource( 2 )]
+
+editor/display_folded = true
+
+[node name="Sprite" parent="character_sprites/base"]
+
+transform/scale = Vector2( 1, 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+shape = SubResource( 1 )
+trigger = false
+_update_shape_index = 0
+
+[node name="RayCast2D_Down" type="RayCast2D" parent="."]
+
+enabled = true
+cast_to = Vector2( 0, 35 )
+layer_mask = 1
+type_mask = 15
+
+[node name="RayCast2D_Up" type="RayCast2D" parent="."]
+
+transform/rot = 180.0
+enabled = true
+cast_to = Vector2( 0, 30 )
+layer_mask = 1
+type_mask = 15
+
+[node name="RayCast2D_Left" type="RayCast2D" parent="."]
+
+transform/rot = 270.0
+enabled = true
+cast_to = Vector2( 0, 30 )
+layer_mask = 1
+type_mask = 15
+
+[node name="RayCast2D_Right" type="RayCast2D" parent="."]
+
+transform/rot = 90.0
+enabled = true
+cast_to = Vector2( 0, 30 )
+layer_mask = 1
+type_mask = 15
+
+
+[editable path="character_sprites"]
